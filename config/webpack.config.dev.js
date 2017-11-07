@@ -85,35 +85,48 @@ module.exports = {
                     },
                 },
                 {
+                    // Transform our own .css files
                     test: /\.css$/,
+                    include: paths.appSrc,
+                    exclude: paths.appNodeModules,
                     use: [
                         require.resolve('style-loader'),
                         {
                             loader: require.resolve('css-loader'),
                             options: {
                                 importLoaders: 1,
+                                sourceMap: true,
+                                modules: true,
+                                localIdentName: '[local]__[hash:base64:4]'
                             },
                         },
                         {
                             loader: require.resolve('postcss-loader'),
                             options: {
-                                // Necessary for external CSS imports to work
-                                ident: 'postcss',
-                                plugins: () => [
-                                    require('postcss-flexbugs-fixes'),
-                                    autoprefixer({
-                                        browsers: [
-                                            '>1%',
-                                            'last 4 versions',
-                                            'Firefox ESR',
-                                            'not ie < 9', // React doesn't support IE8 anyway
-                                        ],
-                                        flexbox: 'no-2009',
-                                    }),
-                                ],
+                            // Necessary for external CSS imports to work
+                            // https://github.com/facebookincubator/create-react-app/issues/2677
+                            ident: 'postcss',
+                            plugins: () => [
+                                require('postcss-flexbugs-fixes'),
+                                autoprefixer({
+                                    browsers: [
+                                        '>1%',
+                                        'last 4 versions',
+                                        'Firefox ESR',
+                                        'not ie < 9', // React doesn't support IE8 anyway
+                                    ],
+                                    flexbox: 'no-2009',
+                                }),
+                            ],
                             },
                         },
                     ],
+                },
+                // Do not transform vendor's & client CSS files
+                {
+                    test: /\.css$/,
+                    include: paths.appNodeModules,
+                    use: [ 'style-loader', 'css-loader' ]
                 },
                 {
                     // Exclude `js` files to keep "css" loader working as it injects

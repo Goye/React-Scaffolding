@@ -30,6 +30,7 @@
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.6",
+    "prettier-stylelint": "^0.4.2",
     "promise": "8.0.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.3",
@@ -53,11 +54,83 @@
     "node": "6.x"
   },
   "babel": {
-    "presets": [
-      "react-app"
-    ]
+    "presets": ["react-app"]
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "plugins": ["react", "prettier"],
+    "rules": {
+      "space-before-blocks": "error",
+      "semi": ["error", "always"],
+      "arrow-spacing": "error",
+      "comma-dangle": ["error", "always-multiline"],
+      "comma-spacing": "error",
+      "comma-style": "error",
+      "eqeqeq": "error",
+      "eol-last": "error",
+      "indent": [
+        "error",
+        4,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "key-spacing": "error",
+      "linebreak-style": ["error", "unix"],
+      "no-console": "off",
+      "no-param-reassign": "error",
+      "no-tabs": "error",
+      "no-trailing-spaces": "error",
+      "no-whitespace-before-property": "error",
+      "quotes": ["error", "single"],
+      "no-unused-vars": [
+        "error",
+        {
+          "ignoreRestSiblings": true
+        }
+      ],
+      "react/display-name": "off",
+      "react/prop-types": "off",
+      "jsx-quotes": ["error", "prefer-double"],
+      "react/jsx-curly-spacing": ["error", "never"],
+      "react/jsx-boolean-value": ["error", "always"],
+      "react/self-closing-comp": [
+        "error",
+        {
+          "component": true,
+          "html": true
+        }
+      ],
+      "react/jsx-no-bind": [
+        "error",
+        {
+          "ignoreRefs": false,
+          "allowArrowFunctions": true,
+          "allowBind": false
+        }
+      ],
+      "react/require-render-return": ["error", "always"],
+      "react/no-is-mounted": "error",
+      "react/jsx-wrap-multilines": [
+        "error",
+        {
+          "return": true,
+          "arrow": true
+        }
+      ],
+      "no-var": "warn",
+      "prettier/prettier": [
+        "error",
+        {
+          "bracketSpacing": true,
+          "jsxBracketSameLine": true,
+          "singleQuote": true,
+          "tabWidth": 4,
+          "trailingComma": "es5",
+          "printWidth": 100,
+          "parser": "babylon"
+        }
+      ]
+    }
   }
 }
